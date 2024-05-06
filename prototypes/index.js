@@ -20,12 +20,21 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
-  orangePetNames() {
+  orangePetNames(kittyData) {
     // Return an array of just the names of kitties who are orange e.g.
-        // ['Tiger', 'Snickers']
+    // ['Tiger', 'Snickers']
 
-        /* CODE GOES HERE */
+    // I want to search for the orange cats and deliver an array of their strings as names (filter)
+    // I want to use filter since it returns more than one.
+    // Return an array of two names (map)
+    const orangeKitties = kittyData.filter((cat) => {
+      return cat.color === 'orange'
+    })
+    const orangeKittyNames = orangeKitties.map((cat) => {
+      return cat.name
+    })
 
+    return orangeKittyNames
     // Annotation:
     // Write your annotation here as a comment
   },
