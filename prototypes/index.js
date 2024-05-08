@@ -12,6 +12,7 @@ const { bosses, sidekicks } = require('./datasets/bosses');
 const { constellations, stars } = require('./datasets/astronomy');
 const { weapons, characters } = require('./datasets/ultima');
 const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
+const { clubs } = require('./datasets/clubs')
 
 
 
@@ -62,8 +63,18 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    /* CODE GOES HERE */
+    const memberClubs = clubs.reduce((acc, curr) => {
+      curr.members.forEach((member) => {
+        if (acc[member]) {
+          acc[member].push(curr.club)
+        } else {
+          acc[member] = [curr.club]
+        }
+      })
+      return acc
+    }, {})
 
+return memberClubs
     // Annotation:
     // Write your annotation here as a comment
   }
@@ -73,7 +84,7 @@ const clubPrompts = {
 const modPrompts = {
   studentsPerMod() {
 
-    const studentsPerInstructor = mods.map((cohort) => ({mod:cohort.mod, studentsPerInstructor:cohort.students/cohort.instructors}))
+    const studentsPerInstructor = mods.map((cohort) => ({ mod: cohort.mod, studentsPerInstructor: cohort.students / cohort.instructors }))
     return studentsPerInstructor
   }
 };
@@ -81,7 +92,7 @@ const modPrompts = {
 const cakePrompts = {
   stockPerCake() {
 
-    const cakeStock = cakes.map((cake) => ({flavor:cake.cakeFlavor, inStock: cake.inStock}))
+    const cakeStock = cakes.map((cake) => ({ flavor: cake.cakeFlavor, inStock: cake.inStock }))
     return cakeStock
   },
 
