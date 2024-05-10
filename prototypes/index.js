@@ -75,8 +75,6 @@ const clubPrompts = {
     }, {})
 
 return memberClubs
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
@@ -97,38 +95,16 @@ const cakePrompts = {
   },
 
   onlyInStock() {
-    // Return an array of only the cakes that are in stock
-    // e.g.
-    // [
-    //   {
-    //   cakeFlavor: 'dark chocolate',
-    //   filling: null,
-    //   frosting: 'dark chocolate ganache',
-    //   toppings: ['dutch process cocoa', 'toasted sugar', 'smoked sea salt'],
-    //   inStock: 15
-    // },
-    // {
-    //   cakeFlavor: 'yellow',
-    //   filling: 'citrus glaze',
-    //   frosting: 'chantilly cream',
-    //   toppings: ['berries', 'edible flowers'],
-    //   inStock: 14
-    // },
-    // ..etc
-    // ]
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const cakesInStock = cakes.filter((cake) => cake.inStock)
+  return cakesInStock
   },
 
   totalInventory() {
-    // Return the total amount of cakes in stock e.g.
-    // 59
-
-    /* CODE GOES HERE */
-
+    const allCakes = cakes.reduce((acc, cake) =>{
+      acc += cake.inStock
+      return acc
+    },)
+    return allCakes
     // Annotation:
     // Write your annotation here as a comment
   },
