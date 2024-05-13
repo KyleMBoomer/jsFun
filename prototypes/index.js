@@ -101,23 +101,14 @@ const cakePrompts = {
 
   totalInventory() {
     const allCakes = cakes.reduce((acc, cake) =>{
-      acc += cake.inStock
-      return acc
-    },)
+      return acc + cake.inStock
+    }, 0)
     return allCakes
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   allToppings() {
-    // Return an array of all unique toppings (no duplicates) needed to bake
-    // every cake in the dataset e.g.
-    // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const allToppings = [...new Set(cakes.flatMap(cake => cake.toppings))]
+return allToppings
   },
 
   groceryList() {
