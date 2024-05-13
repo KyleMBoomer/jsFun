@@ -74,7 +74,7 @@ const clubPrompts = {
       return acc
     }, {})
 
-return memberClubs
+    return memberClubs
   }
 };
 
@@ -96,20 +96,29 @@ const cakePrompts = {
 
   onlyInStock() {
     const cakesInStock = cakes.filter((cake) => cake.inStock)
-  return cakesInStock
+    return cakesInStock
   },
 
   totalInventory() {
-    const allCakes = cakes.reduce((acc, cake) =>{
+    const allCakes = cakes.reduce((acc, cake) => {
       return acc + cake.inStock
     }, 0)
     return allCakes
   },
 
   allToppings() {
-    const allToppings = [...new Set(cakes.flatMap(cake => cake.toppings))]
-return allToppings
-  },
+    //     const allToppings = [...new Set(cakes.flatMap(cake => cake.toppings))]
+    // return allToppings
+    const allToppings = cakes.reduce((acc, cake) => {
+      cake.toppings.forEach((topping) => {
+        if (!acc.includes(topping)) {
+          acc.push(topping)
+        }
+    })
+    return acc
+  }, [])
+  return allToppings
+},
 
   groceryList() {
     // I need to make a grocery list. Please give me an object where the keys are
