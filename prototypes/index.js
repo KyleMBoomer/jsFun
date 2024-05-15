@@ -54,15 +54,6 @@ const kittyPrompts = {
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
   membersBelongingToClubs() {
-    // Your function should access the clubs data through a parameter (it is being passed as an argument in the test file)
-    // Create an object whose keys are the names of people, and whose values are
-    // arrays that include the names of the clubs that person is a part of. e.g.
-    // {
-    //   Louisa: ['Drama', 'Art'],
-    //   Pam: ['Drama', 'Art', 'Chess'],
-    //   ...etc
-    // }
-
     const memberClubs = clubs.reduce((acc, curr) => {
       curr.members.forEach((member) => {
         if (acc[member]) {
@@ -114,85 +105,52 @@ const cakePrompts = {
         if (!acc.includes(topping)) {
           acc.push(topping)
         }
-    })
-    return acc
-  }, [])
-  return allToppings
-},
+      })
+      return acc
+    }, [])
+    return allToppings
+  },
 
   groceryList() {
-    // I need to make a grocery list. Please give me an object where the keys are
-    // each topping, and the values are the amount of that topping I need to buy e.g.
-    // {
-    //    'dutch process cocoa': 1,
-    //    'toasted sugar': 3,
-    //    'smoked sea salt': 3,
-    //    'berries': 2,
-    //    ...etc
-    // }
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const groceries = cakes.reduce((acc, cake) => {
+      cake.toppings.forEach((topping) => {
+        if (!acc[topping]) {
+          acc[topping] = 1
+        } else {
+          acc[topping] += 1
+        }
+      })
+      return acc
+    }, {})
+    return groceries
   }
 };
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: classrooms from ./datasets/classrooms
 const classPrompts = {
   feClassrooms() {
-    // Create an array of just the front-end classrooms. e.g.
-    // [
-    //   { roomLetter: 'A', program: 'FE', capacity: 32 },
-    //   { roomLetter: 'C', program: 'FE', capacity: 27 },
-    //   { roomLetter: 'E', program: 'FE', capacity: 22 },
-    //   { roomLetter: 'G', program: 'FE', capacity: 29 }
-    // ]
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const feRooms = classrooms.filter((classroom) => classroom.program === 'FE')
+    return feRooms
   },
 
   totalCapacities() {
-    // Create an object where the keys are 'feCapacity' and 'beCapacity',
-    // and the values are the total capacity for all classrooms in each program e.g.
-    // {
-    //   feCapacity: 110,
-    //   beCapacity: 96
-    // }
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const capacities = classrooms.reduce((acc, classroom) => {
+      if (!acc[classroom.program]) {
+        acc[classroom.program] = 0
+      }
+      acc[classroom.program] += classroom.capacity
+      return acc
+    }, {})
+    return {
+      feCapacity: capacities['FE'],
+      beCapacity: capacities['BE']
+    }
   },
 
-  sortByCapacity() {
-    // Return the array of classrooms sorted by their capacity (least capacity to greatest)
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
-  }
+    sortByCapacity() {
+  const allCapacity = classrooms.sort((a, b) => a.capacity - b.capacity)
+  return allCapacity
+}
 };
 
 // ---------------------------------------------------------------------------
