@@ -352,7 +352,7 @@ describe("PROTOTYPES", () => {
       }])
     });
 
-    it.skip("getBooksByYear", () => {
+    it("getBooksByYear", () => {
       const e = bookPrompts.getBooksByYear(books, 1990);
 
       expect(e).to.deep.equal([{
