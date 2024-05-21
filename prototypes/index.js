@@ -202,94 +202,58 @@ const weatherPrompts = {
   findSunnySpots() {
     let sunnySpots = []
     weather.forEach((location) => {
-      if(location.type.includes('sunny')){
-      sunnySpots.push(`${location.location} is ${location.type}.`)
+      if (location.type.includes('sunny')) {
+        sunnySpots.push(`${location.location} is ${location.type}.`)
       }
     })
     return sunnySpots
   },
 
   findHighestHumidity() {
-    const wetPlaces = weather.sort((a,b) => b.humidity - a.humidity)
-    let wettestPlace= wetPlaces.shift()
+    const wetPlaces = weather.sort((a, b) => b.humidity - a.humidity)
+    let wettestPlace = wetPlaces.shift()
     return wettestPlace
   }
 };
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
 
 // DATASET: nationalParks from ./datasets/nationalParks
 
 const nationalParksPrompts = {
   getParkVisitList() {
-    /// Return an object containing the names of which parks I need to visit
-    // and the ones I have already visited eg:
-    // {
-    //   parksToVisit: ["Yellowstone", "Glacier", "Everglades"],
-    //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
-    //}
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    let parkList = {
+      parksToVisit: [],
+      parksVisited: []
+    }
+    nationalParks.forEach((park) => {
+      if (park.visited) {
+        parkList.parksVisited.push(park.name)
+      } else {
+        parkList.parksToVisit.push(park.name)
+      }
+    })
+    return parkList
   },
 
   getParkInEachState() {
-    // Return an array of objects where the key is the state and the value is its National Park
-    // eg: [ { Colorado: 'Rocky Mountain' },
-    // { Wyoming: 'Yellowstone' },
-    // { Montana: 'Glacier' },
-    // { Maine: 'Acadia' },
-    // { Utah: 'Zion' },
-    // { Florida: 'Everglades' } ]
 
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const orderedParks = nationalParks.reduce((acc, park) => {
+      let eachPark = { [park.location]: park.name }
+      acc.push(eachPark)
+      return acc
+    }, [])
+    return orderedParks
   },
 
   getParkActivities() {
-    // Return an array of all the activities I can do
-    // in a National Park. Make sure to exclude duplicates. eg:
-    // [ 'hiking',
-    //   'shoeshoing',
-    //   'camping',
-    //   'fishing',
-    //   'boating',
-    //   'watching wildlife',
-    //   'cross-country skiing',
-    //   'swimming',
-    //   'bird watching',
-    //   'canyoneering',
-    //   'backpacking',
-    //   'rock climbing' ]
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
-  }
-};
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
+    let parkActivities = []
+    forEach.nationalParks((park) => {
+      if (!parkActivities.includes(park.activities)) {
+          parkActivities.push(park.activities)
+      }
+      parkActivities.join(', ')
+    })
+    return parkActivities
+  },
 
 
 // DATASET: breweries from ./datasets/breweries
