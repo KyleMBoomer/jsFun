@@ -246,14 +246,16 @@ const nationalParksPrompts = {
 
   getParkActivities() {
     let parkActivities = []
-    forEach.nationalParks((park) => {
-      if (!parkActivities.includes(park.activities)) {
-          parkActivities.push(park.activities)
-      }
-      parkActivities.join(', ')
+    nationalParks.forEach((park) => {
+      park.activities.forEach((activity) => {
+        if (!parkActivities.includes(activity)) {
+            parkActivities.push(activity)
+          }
+      })
     })
     return parkActivities
-  },
+  }
+}
 
 
 // DATASET: breweries from ./datasets/breweries
