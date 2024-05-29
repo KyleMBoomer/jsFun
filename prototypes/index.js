@@ -261,28 +261,21 @@ const nationalParksPrompts = {
 // DATASET: breweries from ./datasets/breweries
 const breweryPrompts = {
   getBeerCount() {
-    // Return the total beer count of all beers for every brewery e.g.
-    // 40
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    let allBeers = []
+    const allBrews = breweries.forEach((brewery) => {
+      brewery.beers.forEach((beer) => {
+        allBeers.push(beer.name)
+      })
+    })
+    return allBeers.length
   },
 
   getBreweryBeerCount() {
-    // Return an array of objects where each object has the name of a brewery
-    // and the count of the beers that brewery has e.g.
-    // [
-    //  { name: 'Little Machine Brew', beerCount: 12 },
-    //  { name: 'Ratio Beerworks', beerCount: 5},
-    // ...etc.
-    // ]
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const breweryTapLists = breweries.map(brewery => ({
+      name: brewery.name, 
+      beerCount: brewery.beers.length
+    }))
+    return breweryTapLists
   },
 
   getSingleBreweryBeerCount(breweryName) {
