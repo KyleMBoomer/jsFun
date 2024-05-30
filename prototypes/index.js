@@ -249,8 +249,8 @@ const nationalParksPrompts = {
     nationalParks.forEach((park) => {
       park.activities.forEach((activity) => {
         if (!parkActivities.includes(activity)) {
-            parkActivities.push(activity)
-          }
+          parkActivities.push(activity)
+        }
       })
     })
     return parkActivities
@@ -272,33 +272,25 @@ const breweryPrompts = {
 
   getBreweryBeerCount() {
     const breweryTapLists = breweries.map(brewery => ({
-      name: brewery.name, 
+      name: brewery.name,
       beerCount: brewery.beers.length
     }))
     return breweryTapLists
   },
 
   getSingleBreweryBeerCount(breweryName) {
-    // Return a number that is the count of beers that the specified
-    // brewery has e.g.
-    // given 'Ratio Beerworks', return 5
 
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const beerLength = breweries.find(brewery => brewery.name === breweryName)
+    return beerLength.beers.length
+    
   },
 
   findHighestAbvBeer() {
-    // Return the beer which has the highest ABV of all beers
-    // e.g.
-    // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
+  
+const hangover = breweries.flatMap(brewery => brewery.beers)
+hangover.sort((a,b) => b.abv -a.abv)
+return hangover[0]
 
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
