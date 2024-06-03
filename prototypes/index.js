@@ -304,28 +304,20 @@ const boardGamePrompts = {
   },
 
   listGamesAlphabetically(type) {
-    // Return an array of just the names of the games within a specified 
-    // type, sorted alphabetically. 
-    // e.g. given an argument of "childrens", return
-    // ["Candy Land", "Connect Four", "Operation", "Trouble"]
 
     const sortedGames = boardGames[type].map((game) => game.name)
     sortedGames.sort()
     return sortedGames
 
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   findHighestRatedGamesByType(type) {
-    // Return an object which is the highest rated game within the specified type.
-    // e.g. given the argument of 'party', return
-    // { name: 'Codenames', rating: 7.4, maxPlayers: 8 },
 
-    /* CODE GOES HERE */
+    const bestGame = boardGames[type].reduce((highest, game) => {
+      return (highest.rating > game.rating) ? highest : game
+    })
+    return bestGame
 
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   averageScoreByType(type) {
@@ -333,8 +325,11 @@ const boardGamePrompts = {
     // e.g. given the argument of "strategy", return 7
     // note: do not worry about rounding your result.
 
-    /* CODE GOES HERE */
-
+    const gameScore = boardGames[type].reduce((score, game) => {
+      score += game.rating
+      return score
+    }, 0)
+    return gameScore/boardGames[type].length
     // Annotation:
     // Write your annotation here as a comment
   },
