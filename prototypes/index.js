@@ -367,8 +367,13 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    /* CODE GOES HERE */
-
+    const students = cohorts.reduce((object, cohort) => {
+      const teachers = instructors.filter(instructor => instructor.module === cohort.module)
+      object[`cohort${cohort.cohort}`] = cohort.studentCount/teachers.length
+      return object
+    }, {})
+  
+    return students
     // Annotation:
     // Write your annotation here as a comment
   },
