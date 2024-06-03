@@ -532,7 +532,7 @@ describe("PROTOTYPES", () => {
       expect(Math.round(avScoreParty * 100) / 100).to.equal(6.54);
     });
 
-    it.skip("averageScoreByTypeAndPlayers", () => {
+    it("averageScoreByTypeAndPlayers", () => {
       const avScoreStrat = boardGamePrompts.averageScoreByTypeAndPlayers('strategy', 2);
       const avScoreChildren = boardGamePrompts.averageScoreByTypeAndPlayers('childrens', 4);
       const avScoreParty = boardGamePrompts.averageScoreByTypeAndPlayers('party', 8);
@@ -544,7 +544,7 @@ describe("PROTOTYPES", () => {
   })
 
   describe("Turing Prompts", () => {
-    it.skip("studentsForEachInstructor", () => {
+    it("studentsForEachInstructor", () => {
       const e = turingPrompts.studentsForEachInstructor();
 
       expect(e).to.deep.equal([{

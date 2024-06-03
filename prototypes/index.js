@@ -329,49 +329,19 @@ const boardGamePrompts = {
       score += game.rating
       return score
     }, 0)
-    return gameScore/boardGames[type].length
-    // Annotation:
-    // Write your annotation here as a comment
+    return gameScore / boardGames[type].length
   },
 
   averageScoreByTypeAndPlayers(type, maximumPlayers) {
-    // Return the average score of any games that match the specified type
-    // and maximum number of players.
-    // e.g. given the arguments of "strategy" and 2, return 6.16666666667
-    // note: do not worry about rounding your result.
 
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const score = boardGames[type].filter((game) => game.maxPlayers === maximumPlayers)
+    const avgScore = score.reduce((acc, game) => {
+      acc += game.rating
+      return acc
+    }, 0)
+    return avgScore / score.length
   }
 };
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
 
 
 // DOUBLE DATASETS
@@ -380,17 +350,14 @@ const boardGamePrompts = {
 // DATASET: instructors, cohorts from ./datasets/turing
 const turingPrompts = {
   studentsForEachInstructor() {
-    // Return an array of instructors where each instructor is an object
-    // with a name and the count of students in their module. e.g.
-    // [
-    //  { name: 'Pam', studentCount: 21 },
-    //  { name: 'Robbie', studentCount: 18 }
-    // ]
 
-    /* CODE GOES HERE */
+    const teachers = instructors.map(instructor => {
+      const students = cohorts.filter(cohort => cohort.module === instructor.module)
+      const collectedStudents = students.reduce((sum, cohort) => sum + cohort.studentCount, 0)
+      return ({ name: instructor.name, studentCount: collectedStudents })
+    })
 
-    // Annotation:
-    // Write your annotation here as a comment
+    return teachers
   },
 
   studentsPerInstructor() {
