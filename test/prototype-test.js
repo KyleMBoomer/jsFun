@@ -502,7 +502,7 @@ describe("PROTOTYPES", () => {
       expect(partyGames).to.deep.equal(["Werewolf", "Cards Against Humanity", "Codenames", "Sushi Go! Party", "Tsuro"]);
     });
 
-    it.skip("listGamesAlphabetically", () => {
+    it("listGamesAlphabetically", () => {
       const strategyGames = boardGamePrompts.listGamesAlphabetically('strategy');
       const childrensGames = boardGamePrompts.listGamesAlphabetically('childrens');
       const partyGames = boardGamePrompts.listGamesAlphabetically('party');
