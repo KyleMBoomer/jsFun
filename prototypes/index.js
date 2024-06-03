@@ -282,37 +282,25 @@ const breweryPrompts = {
 
     const beerLength = breweries.find(brewery => brewery.name === breweryName)
     return beerLength.beers.length
-    
+
   },
 
   findHighestAbvBeer() {
-  
-const hangover = breweries.flatMap(brewery => brewery.beers)
-hangover.sort((a,b) => b.abv -a.abv)
-return hangover[0]
+
+    const hangover = breweries.flatMap(brewery => brewery.beers)
+    hangover.sort((a, b) => b.abv - a.abv)
+    return hangover[0]
 
   }
 };
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
 
 // DATASET: weather from './datasets/boardGames
 
 const boardGamePrompts = {
   listGames(type) {
-    // Return an array of just the names of the games within a specified type. 
-    // e.g. given an argument of "strategy", return
-    // ["Chess", "Catan", "Checkers", "Pandemic", "Battle Ship", "Azul", "Ticket to Ride"]
 
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const certainGames = boardGames[type].map((game) => game.name)
+    return certainGames
   },
 
   listGamesAlphabetically(type) {

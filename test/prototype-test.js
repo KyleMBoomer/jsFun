@@ -492,7 +492,7 @@ describe("PROTOTYPES", () => {
   });
 
   describe("Board Game Prompts", () => {
-    it.skip("listGames", () => {
+    it("listGames", () => {
       const strategyGames = boardGamePrompts.listGames('strategy');
       const childrensGames = boardGamePrompts.listGames('childrens');
       const partyGames = boardGamePrompts.listGames('party');
