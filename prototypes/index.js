@@ -369,13 +369,11 @@ const turingPrompts = {
 
     const students = cohorts.reduce((object, cohort) => {
       const teachers = instructors.filter(instructor => instructor.module === cohort.module)
-      object[`cohort${cohort.cohort}`] = cohort.studentCount/teachers.length
+      object[`cohort${cohort.cohort}`] = cohort.studentCount / teachers.length
       return object
     }, {})
-  
+
     return students
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   modulesPerTeacher() {
@@ -392,11 +390,22 @@ const turingPrompts = {
     //     Christie: [1, 2, 3, 4],
     //     Will: [1, 2, 3, 4]
     //   }
-
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    return instructors.reduce((acc,instructor) => {
+      if(!acc[instructor.name]) {
+        acc[instructor.name] = []; 
+      }
+      instructor.teaches.forEach(topic => {
+        cohorts.forEach(cohort => {
+          cohort.curriculum.forEach(curriculum => {
+            if (topic === curriculum && !acc[instructor.name].includes(cohort.module)) {
+              acc[instructor.name].push(cohort.module)
+            }
+          })
+        })
+      })
+      acc[instructor.name].sort((a,b) => a-b)
+      return acc
+    },{})
   },
 
   curriculumPerTeacher() {
@@ -410,11 +419,29 @@ const turingPrompts = {
     // }
 
     /* CODE GOES HERE */
-
+    let topicObj = {};
+    cohorts.forEach(classes => {
+     classes.curriculum.forEach(topic => { //topic is index of cohorts.curriculum
+      if(!topicObj[topic]){
+        topicObj[topic] = []
+      }
+    instructors.forEach(teach => {
+      teach.teaches.forEach(lesson => {
+        if(topic.includes(lesson) && !topicObj[topic].includes(teach.name)){ 
+          topicObj[topic].push(teach.name)
+        }
+      })
+    })
+     })
+     
+    })
+    // console.log(topicObj)
+    return topicObj
     // Annotation:
     // Write your annotation here as a comment
   }
 };
+
 
 
 
