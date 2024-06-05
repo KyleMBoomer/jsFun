@@ -54,20 +54,19 @@ const kittyPrompts = {
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
   membersBelongingToClubs() {
-    const memberClubs = clubs.reduce((acc, curr) => {
-      curr.members.forEach((member) => {
-        if (acc[member]) {
-          acc[member].push(curr.club)
+    return clubs.reduce((obj, club) => {
+      club.members.forEach((member) => {
+        if (obj[member]) {
+          obj[member].push(club.club)
         } else {
-          acc[member] = [curr.club]
+          obj[member] = [club.club]
         }
       })
-      return acc
+      return obj
     }, {})
-
-    return memberClubs
   }
-};
+}
+  ;
 
 
 const modPrompts = {
@@ -377,22 +376,10 @@ const turingPrompts = {
   },
 
   modulesPerTeacher() {
-    // Return an object where each key is an instructor name and each value is
-    // an array of the modules they can teach based on their skills. e.g.:
-    // {
-    //     Pam: [2, 4],
-    //     Brittany: [2, 4],
-    //     Nathaniel: [2, 4],
-    //     Robbie: [4],
-    //     Leta: [2, 4],
-    //     Travis: [1, 2, 3, 4],
-    //     Louisa: [1, 2, 3, 4],
-    //     Christie: [1, 2, 3, 4],
-    //     Will: [1, 2, 3, 4]
-    //   }
-    return instructors.reduce((acc,instructor) => {
-      if(!acc[instructor.name]) {
-        acc[instructor.name] = []; 
+
+    return instructors.reduce((acc, instructor) => {
+      if (!acc[instructor.name]) {
+        acc[instructor.name] = [];
       }
       instructor.teaches.forEach(topic => {
         cohorts.forEach(cohort => {
@@ -403,42 +390,30 @@ const turingPrompts = {
           })
         })
       })
-      acc[instructor.name].sort((a,b) => a-b)
+      acc[instructor.name].sort((a, b) => a - b)
       return acc
-    },{})
+    }, {})
   },
 
   curriculumPerTeacher() {
-    // Return an object where each key is a curriculum topic and each value is
-    // an array of instructors who teach that topic e.g.:
-    // {
-    //   html: [ 'Travis', 'Louisa' ],
-    //   css: [ 'Travis', 'Louisa' ],
-    //   javascript: [ 'Travis', 'Louisa', 'Christie', 'Will' ],
-    //   recursion: [ 'Pam', 'Leta' ]
-    // }
 
-    /* CODE GOES HERE */
     let topicObj = {};
     cohorts.forEach(classes => {
-     classes.curriculum.forEach(topic => { //topic is index of cohorts.curriculum
-      if(!topicObj[topic]){
-        topicObj[topic] = []
-      }
-    instructors.forEach(teach => {
-      teach.teaches.forEach(lesson => {
-        if(topic.includes(lesson) && !topicObj[topic].includes(teach.name)){ 
-          topicObj[topic].push(teach.name)
+      classes.curriculum.forEach(topic => { //topic is index of cohorts.curriculum
+        if (!topicObj[topic]) {
+          topicObj[topic] = []
         }
+        instructors.forEach(teach => {
+          teach.teaches.forEach(lesson => {
+            if (topic.includes(lesson) && !topicObj[topic].includes(teach.name)) {
+              topicObj[topic].push(teach.name)
+            }
+          })
+        })
       })
+
     })
-     })
-     
-    })
-    // console.log(topicObj)
     return topicObj
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
