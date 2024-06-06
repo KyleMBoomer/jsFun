@@ -360,11 +360,6 @@ const turingPrompts = {
   },
 
   studentsPerInstructor() {
-    // Return an object of how many students per teacher there are in each cohort e.g.
-    // {
-    // cohort1806: 9,
-    // cohort1804: 10.5
-    // }
 
     const students = cohorts.reduce((object, cohort) => {
       const teachers = instructors.filter(instructor => instructor.module === cohort.module)
@@ -418,39 +413,25 @@ const turingPrompts = {
 };
 
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
 // DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
   bossLoyalty() {
-    // Create an array of objects that each have the name of the boss and the sum
-    // loyalty of all their sidekicks. e.g.:
-    // [
-    //   { bossName: 'Jafar', sidekickLoyalty: 3 },
-    //   { bossName: 'Ursula', sidekickLoyalty: 20 },
-    //   { bossName: 'Scar', sidekickLoyalty: 16 }
-    // ]
 
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    const keys = Object.keys(bosses).flatMap((boss) => {
+      return [{
+        bossName: bosses[boss].name, sidekickLoyalty: bosses[boss].sidekicks.reduce((sum, sidekick) => {
+          const match = sidekicks.find(helper => helper.name === sidekick.name)
+          if (match) {
+            sum += match.loyaltyToBoss
+          }
+          return sum
+        }, 0)
+      }]
+    })
+    return keys
   }
-};
+}
+
 
 
 
