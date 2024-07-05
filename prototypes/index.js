@@ -91,14 +91,12 @@ const cakePrompts = {
 
   totalInventory() {
     const allCakes = cakes.reduce((acc, cake) => {
-      return acc + cake.inStock
+      return acc += cake.inStock
     }, 0)
     return allCakes
   },
 
   allToppings() {
-    //     const allToppings = [...new Set(cakes.flatMap(cake => cake.toppings))]
-    // return allToppings
     const allToppings = cakes.reduce((acc, cake) => {
       cake.toppings.forEach((topping) => {
         if (!acc.includes(topping)) {
@@ -320,10 +318,7 @@ const boardGamePrompts = {
   },
 
   averageScoreByType(type) {
-    // Return the average score for the specified type.
-    // e.g. given the argument of "strategy", return 7
-    // note: do not worry about rounding your result.
-
+   
     const gameScore = boardGames[type].reduce((score, game) => {
       score += game.rating
       return score
@@ -419,7 +414,8 @@ const bossPrompts = {
 
     const keys = Object.keys(bosses).flatMap((boss) => {
       return [{
-        bossName: bosses[boss].name, sidekickLoyalty: bosses[boss].sidekicks.reduce((sum, sidekick) => {
+        bossName: bosses[boss].name, 
+        sidekickLoyalty: bosses[boss].sidekicks.reduce((sum, sidekick) => {
           const match = sidekicks.find(helper => helper.name === sidekick.name)
           if (match) {
             sum += match.loyaltyToBoss
@@ -428,25 +424,10 @@ const bossPrompts = {
         }, 0)
       }]
     })
+    console.log(keys)
     return keys
   }
 }
-
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
 
 
 // DATASET: constellations, stars } from ./datasets/astronomy
