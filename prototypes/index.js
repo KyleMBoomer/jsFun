@@ -62,6 +62,7 @@ const clubPrompts = {
           obj[member] = [club.club]
         }
       })
+      console.log('obj', obj)
       return obj
     }, {})
   }
@@ -424,7 +425,6 @@ const bossPrompts = {
         }, 0)
       }]
     })
-    console.log(keys)
     return keys
   }
 }
