@@ -62,7 +62,6 @@ const clubPrompts = {
           obj[member] = [club.club]
         }
       })
-      console.log('obj', obj)
       return obj
     }, {})
   }
@@ -390,7 +389,7 @@ const turingPrompts = {
 
     let topicObj = {};
     cohorts.forEach(classes => {
-      classes.curriculum.forEach(topic => { //topic is index of cohorts.curriculum
+      classes.curriculum.forEach(topic => { 
         if (!topicObj[topic]) {
           topicObj[topic] = []
         }
@@ -461,11 +460,21 @@ const astronomyPrompts = {
     //     color: 'blue'
     //   }
     // ]
+const matches = []
+const foundStars = Object.keys(constellations).forEach(constellation => {
+  const starNames = constellations[constellation].starNames
+  const justMatches = starNames.forEach(starName => {
 
-    /* CODE GOES HERE */
+    stars.forEach(star => {
+      if(starName === star.name) {
+        matches.push(star)
+      }
+    })
+  })
+  
+})
 
-    // Annotation:
-    // Write your annotation here as a comment
+return matches.sort((a,b)=> a.visualMagnitude - b.visualMagnitude)
   },
 
   starsByColor() {
