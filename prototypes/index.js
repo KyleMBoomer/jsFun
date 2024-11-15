@@ -318,7 +318,7 @@ const boardGamePrompts = {
   },
 
   averageScoreByType(type) {
-   
+
     const gameScore = boardGames[type].reduce((score, game) => {
       score += game.rating
       return score
@@ -389,7 +389,7 @@ const turingPrompts = {
 
     let topicObj = {};
     cohorts.forEach(classes => {
-      classes.curriculum.forEach(topic => { 
+      classes.curriculum.forEach(topic => {
         if (!topicObj[topic]) {
           topicObj[topic] = []
         }
@@ -414,7 +414,7 @@ const bossPrompts = {
 
     const keys = Object.keys(bosses).flatMap((boss) => {
       return [{
-        bossName: bosses[boss].name, 
+        bossName: bosses[boss].name,
         sidekickLoyalty: bosses[boss].sidekicks.reduce((sum, sidekick) => {
           const match = sidekicks.find(helper => helper.name === sidekick.name)
           if (match) {
@@ -432,66 +432,37 @@ const bossPrompts = {
 // DATASET: constellations, stars } from ./datasets/astronomy
 const astronomyPrompts = {
   starsInConstellations() {
-    // Return an array of all the star objects that appear in any of the constellations
-    // listed in the constellations object e.g.
-    // [
-    //   { name: 'Rigel',
-    //     visualMagnitude: 0.13,
-    //     constellation: 'Orion',
-    //     lightYearsFromEarth: 860,
-    //     color: 'blue' },
-    //   {
-    //     name: 'Achernar',
-    //     visualMagnitude: 0.46,
-    //     constellation: 'The Plow',
-    //     lightYearsFromEarth: 140,
-    //     color: 'blue'
-    //   },
-    //   { name: 'Betelgeuse',
-    //     visualMagnitude: 0.5,
-    //     constellation: 'Orion',
-    //     lightYearsFromEarth: 640,
-    //     color: 'red' },
-    //   {
-    //     name: 'Hadar',
-    //     visualMagnitude: 0.61,
-    //     constellation: 'The Little Dipper',
-    //     lightYearsFromEarth: 350,
-    //     color: 'blue'
-    //   }
-    // ]
-const matches = []
-const foundStars = Object.keys(constellations).forEach(constellation => {
-  const starNames = constellations[constellation].starNames
-  const justMatches = starNames.forEach(starName => {
 
-    stars.forEach(star => {
-      if(starName === star.name) {
-        matches.push(star)
-      }
+    const matches = []
+    const foundStars = Object.keys(constellations).forEach(constellation => {
+      const starNames = constellations[constellation].starNames
+      const justMatches = starNames.forEach(starName => {
+
+        stars.forEach(star => {
+          if (starName === star.name) {
+            matches.push(star)
+          }
+        })
+      })
     })
-  })
-  
-})
 
-return matches.sort((a,b)=> a.visualMagnitude - b.visualMagnitude)
+    return matches.sort((a, b) => a.visualMagnitude - b.visualMagnitude)
   },
 
   starsByColor() {
-    // Return an object with keys of the different colors of the stars,
-    // whose values are arrays containing the star objects that match e.g.
-    // {
-    //   blue: [{obj}, {obj}, {obj}, {obj}, {obj}],
-    //   white: [{obj}, {obj}],
-    //   yellow: [{obj}, {obj}],
-    //   orange: [{obj}],
-    //   red: [{obj}]
-    // }
 
-    /* CODE GOES HERE */
+    const colorGroups = stars.reduce((obj, star) => {
+      if (!obj[star.color]) {
+        obj[star.color] = []
+      }
+      if (!obj[star.color].includes(star)) {
+        obj[star.color].push(star)
+      }
+      console.log('obj', obj)
+      return obj
+    }, {})
+    return colorGroups
 
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   constellationsStarsExistIn() {
