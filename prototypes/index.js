@@ -465,43 +465,12 @@ const astronomyPrompts = {
   },
 
   constellationsStarsExistIn() {
-    // Sort the stars by brightness and return an array of the star's constellation names
-    // Brightest Stars are indicated by visualMagnitude - the lower the number, the brighter the star
-    // e.g.
-    //  [ "Canis Major",
-    //    "Carina",
-    //    "Boötes",
-    //    "Auriga",
-    //    "Orion",
-    //    "Lyra",
-    //    "Canis Minor",
-    //    "The Plow",
-    //    "Orion",
-    //    "The Little Dipper" ]
 
-
-  const brightness = stars.sort((a,b) => a.visualMagnitude - b.visualMagnitude)
+    const brightness = stars.sort((a, b) => a.visualMagnitude - b.visualMagnitude)
     const names = brightness.filter(star => star.constellation)
     return names.map(star => star.constellation)
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
 
 
 // DATASET: charaters, weapons from ./datasets/ultima
@@ -510,9 +479,16 @@ const ultimaPrompts = {
 
     // Return the sum of the amount of damage for all the weapons that our characters can use
     // Answer => 113
-
-    /* CODE GOES HERE */
-
+    let allDamage = 0
+    let allWeapons = characters.flatMap(char => char.weapons)
+      Object.keys(weapons).forEach(weapon => {
+        allWeapons.forEach(hit => {
+          if (hit === weapon) {
+            allDamage += weapons[weapon].damage
+          }
+        })
+      })
+      return allDamage 
     // Annotation:
     // Write your annotation here as a comment
   },
