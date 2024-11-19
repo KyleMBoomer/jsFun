@@ -458,7 +458,6 @@ const astronomyPrompts = {
       if (!obj[star.color].includes(star)) {
         obj[star.color].push(star)
       }
-      console.log('obj', obj)
       return obj
     }, {})
     return colorGroups
@@ -481,8 +480,9 @@ const astronomyPrompts = {
     //    "The Little Dipper" ]
 
 
-    /* CODE GOES HERE */
-
+  const brightness = stars.sort((a,b) => a.visualMagnitude - b.visualMagnitude)
+    const names = brightness.filter(star => star.constellation)
+    return names.map(star => star.constellation)
     // Annotation:
     // Write your annotation here as a comment
   }
