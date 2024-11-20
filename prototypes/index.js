@@ -477,31 +477,34 @@ const astronomyPrompts = {
 const ultimaPrompts = {
   totalDamage() {
 
-    // Return the sum of the amount of damage for all the weapons that our characters can use
-    // Answer => 113
     let allDamage = 0
     let allWeapons = characters.flatMap(char => char.weapons)
-      Object.keys(weapons).forEach(weapon => {
-        allWeapons.forEach(hit => {
-          if (hit === weapon) {
-            allDamage += weapons[weapon].damage
-          }
-        })
+    Object.keys(weapons).forEach(weapon => {
+      allWeapons.forEach(hit => {
+        if (hit === weapon) {
+          allDamage += weapons[weapon].damage
+        }
       })
-      return allDamage 
-    // Annotation:
-    // Write your annotation here as a comment
+    })
+    return allDamage
   },
 
   charactersByTotal() {
 
-    // Return the sum damage and total range for each character as an object.
-    // ex: [ { Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}
+ return characters.reduce((arr, hero) => {
+    const key = hero.name 
+    const value = hero.weapons.reduce((obj, weapon) => {
+      if(weapons[weapon]) {
+        obj.damage += weapons[weapon].damage
+        obj.range += weapons[weapon].range
+      }
+      return obj
+    }, {damage:0, range:0})
+ arr.push({[key] : value})
+ console.log(arr)
+    return arr
+  } ,[])
 
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 };
 
