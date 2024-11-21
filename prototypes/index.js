@@ -491,37 +491,21 @@ const ultimaPrompts = {
 
   charactersByTotal() {
 
- return characters.reduce((arr, hero) => {
-    const key = hero.name 
-    const value = hero.weapons.reduce((obj, weapon) => {
-      if(weapons[weapon]) {
-        obj.damage += weapons[weapon].damage
-        obj.range += weapons[weapon].range
-      }
-      return obj
-    }, {damage:0, range:0})
- arr.push({[key] : value})
- console.log(arr)
-    return arr
-  } ,[])
+    return characters.reduce((arr, hero) => {
+      const key = hero.name
+      const value = hero.weapons.reduce((obj, weapon) => {
+        if (weapons[weapon]) {
+          obj.damage += weapons[weapon].damage
+          obj.range += weapons[weapon].range
+        }
+        return obj
+      }, { damage: 0, range: 0 })
+      arr.push({ [key]: value })
+      return arr
+    }, [])
 
   },
 };
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
 
 
 // DATASET: dinosaurs, humans, movies from ./datasets/dinosaurs
@@ -537,7 +521,15 @@ const dinosaurPrompts = {
     //   'Jurassic World: Fallen Kingdom': 18
     // }
 
-    /* CODE GOES HERE */
+    let awesomeDinos = Object.keys(dinosaurs).filter(dino => dinosaurs[dino].isAwesome)
+    return movies.reduce((obj, movie) => {
+      let justMovieDinos = movie.dinos.filter(dino => awesomeDinos.includes(dino))
+      if (!obj[movie.title]) {
+        obj[movie.title] = justMovieDinos.length
+      }
+      console.log(obj)
+      return obj
+    }, {})
 
     // Annotation:
     // Write your annotation here as a comment
