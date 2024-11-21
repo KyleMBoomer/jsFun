@@ -527,7 +527,6 @@ const dinosaurPrompts = {
       if (!obj[movie.title]) {
         obj[movie.title] = justMovieDinos.length
       }
-      console.log(obj)
       return obj
     }, {})
 
