@@ -511,7 +511,7 @@ const ultimaPrompts = {
 // DATASET: dinosaurs, humans, movies from ./datasets/dinosaurs
 const dinosaurPrompts = {
   countAwesomeDinosaurs() {
- 
+
     let awesomeDinos = Object.keys(dinosaurs).filter(dino => dinosaurs[dino].isAwesome)
     return movies.reduce((obj, movie) => {
       let justMovieDinos = movie.dinos.filter(dino => awesomeDinos.includes(dino))
@@ -523,35 +523,23 @@ const dinosaurPrompts = {
   },
 
   averageAgePerMovie() {
-    /* Return an object where each key is a movie director's name and each value is
-        an object whose key is a movie's title and whose value is the average age
-        of the cast on the release year of that movie.
-      e.g.:
-      {
-        'Steven Spielberg':
-          {
-            'Jurassic Park': 34,
-            'The Lost World: Jurassic Park': 37
-          },
-        'Joe Johnston':
-          {
-            'Jurassic Park III': 44
-          },
-        'Colin Trevorrow':
-          {
-            'Jurassic World': 56
-           },
-        'J. A. Bayona':
-          {
-            'Jurassic World: Fallen Kingdom': 59
-          }
+  
+    return movies.reduce((obj, movie) => {
+      let ages = 0
+      if (!obj[movie.director]) {
+        obj[movie.director] = {}
       }
-    */
+      const totalAge = movie.cast.reduce((sum, member) => {
+        if (humans[member]) {
+          sum += movie.yearReleased - humans[member].yearBorn
+        }
+        return sum
+      }, 0)
+      const avgAge = Math.floor(totalAge/movie.cast.length) 
+      obj[movie.director][movie.title] = avgAge
+      return obj
+    }, {})
 
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
   },
 
   uncastActors() {
