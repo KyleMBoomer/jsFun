@@ -523,7 +523,7 @@ const dinosaurPrompts = {
   },
 
   averageAgePerMovie() {
-  
+
     return movies.reduce((obj, movie) => {
       let ages = 0
       if (!obj[movie.director]) {
@@ -535,7 +535,7 @@ const dinosaurPrompts = {
         }
         return sum
       }, 0)
-      const avgAge = Math.floor(totalAge/movie.cast.length) 
+      const avgAge = Math.floor(totalAge / movie.cast.length)
       obj[movie.director][movie.title] = avgAge
       return obj
     }, {})
@@ -568,7 +568,18 @@ const dinosaurPrompts = {
       }]
     */
 
-    /* CODE GOES HERE */
+    const unemployed = []
+    Object.keys(humans).forEach(human => {
+      const isEmployed = movies.some(movie => movie.cast.includes(human))
+        if (!isEmployed) {
+          unemployed.push({
+            name: human,
+            nationality: humans[human].nationality,
+            imdbStarMeterRating: humans[human].imdbStarMeterRating
+          })
+        }
+      })
+    return unemployed.sort((a,b) => a.nationality.localeCompare(b.nationality))
 
     // Annotation:
     // Write your annotation here as a comment
